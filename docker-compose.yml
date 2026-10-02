@@ -1,0 +1,20 @@
+services:
+  app:
+    build: .
+    image: laravel-docs-rag
+    ports:
+      - "${APP_PORT:-8000}:8000"   # APP_PORT=8080 docker compose up, if 8000 is taken
+    env_file:
+      - path: .env
+        required: false
+    volumes:
+      - rag-data:/data   # downloaded docs + Chroma index survive container restarts
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 30s
+      start_period: 30s
+      retries: 3
+
+volumes:
+  rag-data:

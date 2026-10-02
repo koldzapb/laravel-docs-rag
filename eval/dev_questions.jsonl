@@ -1,0 +1,35 @@
+{"id": "dev01", "question": "How do I run code after every job in a batch has completed successfully?", "type": "in_scope", "gold": [{"file": "queues.md", "heading": "Dispatching Batches"}]}
+{"id": "dev02", "question": "How can I stop the same job from being pushed onto the queue twice?", "type": "in_scope", "gold": [{"file": "queues.md", "heading": "Unique Jobs"}]}
+{"id": "dev03", "question": "How do I limit how many times a user can hit my login route per minute?", "type": "in_scope", "gold": [{"file": "routing.md", "heading": "Rate Limiting"}, {"file": "rate-limiting.md", "heading": "Rate Limiting"}]}
+{"id": "dev04", "question": "How do I eager load relationships to avoid the N+1 query problem?", "type": "in_scope", "gold": [{"file": "eloquent-relationships.md", "heading": "Eager Loading"}]}
+{"id": "dev05", "question": "How do I hide the password attribute when a model is converted to JSON?", "type": "in_scope", "gold": [{"file": "eloquent-serialization.md", "heading": "Hiding Attributes From JSON"}]}
+{"id": "dev06", "question": "How do I schedule an artisan command to run every day at 1am?", "type": "in_scope", "gold": [{"file": "scheduling.md", "heading": "Scheduling Artisan Commands"}, {"file": "scheduling.md", "heading": "Schedule Frequency Options"}]}
+{"id": "dev07", "question": "How do I issue API tokens to users for a mobile application?", "type": "in_scope", "gold": [{"file": "sanctum.md", "heading": "Mobile Application Authentication"}, {"file": "sanctum.md", "heading": "API Token Authentication"}]}
+{"id": "dev08", "question": "How can I validate that an uploaded file is an image no larger than 1MB?", "type": "in_scope", "gold": [{"file": "validation.md", "heading": "Validating Files"}, {"file": "validation.md", "heading": "image"}]}
+{"id": "dev09", "question": "What is the difference between soft deleting a model and force deleting it?", "type": "in_scope", "gold": [{"file": "eloquent.md", "heading": "Soft Deleting"}]}
+{"id": "dev10", "question": "How do I fake outgoing HTTP requests in my tests?", "type": "in_scope", "gold": [{"file": "http-client.md", "heading": "Faking Responses"}, {"file": "http-client.md", "heading": "Testing"}]}
+{"id": "dev11", "question": "How do I add a column to an existing table in a migration?", "type": "in_scope", "gold": [{"file": "migrations.md", "heading": "Creating Columns"}, {"file": "migrations.md", "heading": "Updating Tables"}]}
+{"id": "dev12", "question": "How do I generate a temporary signed URL that expires?", "type": "in_scope", "gold": [{"file": "urls.md", "heading": "Signed URLs"}]}
+{"id": "dev13", "question": "How do I write a policy to decide whether a user can update a post?", "type": "in_scope", "gold": [{"file": "authorization.md", "heading": "Writing Policies"}, {"file": "authorization.md", "heading": "Creating Policies"}]}
+{"id": "dev14", "question": "How do I define an accessor that formats an attribute when it is read?", "type": "in_scope", "gold": [{"file": "eloquent-mutators.md", "heading": "Defining an Accessor"}]}
+{"id": "dev15", "question": "Can I keep a queued job from running until the database transaction commits?", "type": "in_scope", "gold": [{"file": "queues.md", "heading": "Jobs & Database Transactions"}]}
+{"id": "dev16", "question": "How do I send a notification via Slack?", "type": "in_scope", "gold": [{"file": "notifications.md", "heading": "Slack Notifications"}]}
+{"id": "dev17", "question": "How do I cache a value forever, or retrieve it and store a default if missing?", "type": "in_scope", "gold": [{"file": "cache.md", "heading": "Retrieve and Store"}, {"file": "cache.md", "heading": "Storing Items in the Cache"}]}
+{"id": "dev18", "question": "How can I share data with every Blade view?", "type": "in_scope", "gold": [{"file": "views.md", "heading": "Sharing Data With All Views"}]}
+{"id": "dev19", "question": "What does the chunk method on a collection do?", "type": "in_scope", "gold": [{"file": "collections.md", "heading": "chunk()"}]}
+{"id": "dev20", "question": "How do I keep my queue workers running in production with Supervisor?", "type": "in_scope", "gold": [{"file": "queues.md", "heading": "Supervisor Configuration"}]}
+{"id": "dev21", "question": "How do I register a middleware that runs on every request?", "type": "in_scope", "gold": [{"file": "middleware.md", "heading": "Global Middleware"}]}
+{"id": "dev22", "question": "How do I stream a large file download to the browser?", "type": "in_scope", "gold": [{"file": "responses.md", "heading": "Streamed Downloads"}, {"file": "responses.md", "heading": "File Downloads"}]}
+{"id": "dev23", "question": "How do I configure Django's settings.py for PostgreSQL?", "type": "out_of_scope", "gold": []}
+{"id": "dev24", "question": "What is the best recipe for a chocolate cake?", "type": "out_of_scope", "gold": []}
+{"id": "dev25", "question": "How do I use Laravel's built-in GraphQL server to define a schema?", "type": "out_of_scope", "gold": []}
+{"id": "dev26", "question": "How do I configure webpack module federation in a Next.js app?", "type": "out_of_scope", "gold": []}
+{"id": "dev27", "question": "Who won the 2018 FIFA World Cup?", "type": "out_of_scope", "gold": []}
+{"id": "dev28", "question": "My job keeps failing because an external API is down; how do I wait longer between each retry?", "type": "in_scope", "gold": [{"file": "queues.md", "heading": "Max Attempts"}, {"file": "queues.md", "heading": "Dealing With Failed Jobs"}]}
+{"id": "dev29", "question": "Where do I put logic that should happen whenever a model is created or updated?", "type": "in_scope", "gold": [{"file": "eloquent.md", "heading": "Events"}, {"file": "eloquent.md", "heading": "Observers"}]}
+{"id": "dev30", "question": "How do I make my app respond in French based on the user's language?", "type": "in_scope", "gold": [{"file": "localization.md", "heading": "Configuring the Locale"}]}
+{"id": "dev31", "question": "How do I protect a form against cross-site request forgery?", "type": "in_scope", "gold": [{"file": "csrf.md", "heading": "Preventing CSRF Requests"}]}
+{"id": "dev32", "question": "How do I store user uploads on Amazon S3?", "type": "in_scope", "gold": [{"file": "filesystem.md", "heading": "Amazon S3 Compatible Filesystems"}, {"file": "filesystem.md", "heading": "File Uploads"}]}
+{"id": "dev33", "question": "How do I wrap several database queries so they all succeed or all roll back?", "type": "in_scope", "gold": [{"file": "database.md", "heading": "Database Transactions"}]}
+{"id": "dev34", "question": "How do I return a 404 automatically when a model isn't found by its route parameter?", "type": "in_scope", "gold": [{"file": "routing.md", "heading": "Implicit Binding"}, {"file": "eloquent.md", "heading": "Not Found Exceptions"}]}
+{"id": "dev35", "question": "How can I push realtime updates to the browser over websockets?", "type": "in_scope", "gold": [{"file": "broadcasting.md", "heading": "Broadcasting"}, {"file": "reverb.md", "heading": "Laravel Reverb"}]}

@@ -1,0 +1,43 @@
+[project]
+name = "laravel-docs-rag"
+version = "0.1.0"
+description = "Ask the Laravel docs: a hybrid-search RAG app with citations (plain Python, no frameworks)."
+readme = "README.md"
+license = "MIT"
+authors = [
+    { name = "Ninko Koldžić" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "chromadb>=1.5.9",
+    "fastapi>=0.142.2",
+    "fastembed>=0.8.1",
+    "openai>=3.23.0",
+    "python-dotenv>=1.2.4",
+    "rank-bm25>=0.2.2",
+    "uvicorn[standard]>=0.54.0",
+]
+
+[project.scripts]
+rag = "laravel_docs_rag.cli:main"
+
+[build-system]
+requires = ["uv_build>=0.9.22,<0.10.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28.1",
+    "pytest>=9.1.1",
+    "ruff>=0.16.10",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

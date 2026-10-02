@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ask the Laravel docs</title>
+<style>
+  :root { --fg: #1f2328; --muted: #656d76; --bg: #fff; --card: #f6f8fa; --accent: #f9322c; }
+  @media (prefers-color-scheme: dark) {
+    :root { --fg: #e6edf3; --muted: #9198a1; --bg: #0d1117; --card: #161b22; }
+  }
+  body { font: 16px/1.55 system-ui, sans-serif; color: var(--fg); background: var(--bg);
+         max-width: 760px; margin: 2rem auto; padding: 0 16px; }
+  h1 { font-size: 1.5rem; } h1 span { color: var(--accent); }
+  form { display: flex; gap: .5rem; }
+  input { flex: 1; padding: .6rem .8rem; font-size: 1rem; border: 1px solid var(--muted);
+          border-radius: 6px; background: var(--bg); color: var(--fg); }
+  button { padding: .6rem 1rem; border: 0; border-radius: 6px; background: var(--accent);
+           color: #fff; font-size: 1rem; cursor: pointer; }
+  button:disabled { opacity: .6; }
+  #answer { white-space: pre-wrap; background: var(--card); padding: 1rem; border-radius: 6px;
+            margin-top: 1.5rem; overflow-x: auto; }
+  #answer:empty, #sources:empty { display: none; }
+  ol { padding-left: 1.4rem; } li.uncited { color: var(--muted); }
+  a { color: inherit; } small { color: var(--muted); }
+</style>
+</head>
+<body>
+<h1>Ask the <span>Laravel</span> docs</h1>
+<p><small>Answers come only from the Laravel 13.x documentation, with links to the exact section.</small></p>
+<form id="form">
+  <input id="q" placeholder="How do I dispatch a batch of jobs?" required minlength="3" autofocus>
+  <button id="go">Ask</button>
+</form>
+<div id="answer"></div>
+<ol id="sources"></ol>
+<script>
+const form = document.getElementById("form");
+const button = document.getElementById("go");
+const answerEl = document.getElementById("answer");
+const sourcesEl = document.getElementById("sources");
+
+form.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  button.disabled = true;
+  answerEl.textContent = "Thinking...";
+  sourcesEl.replaceChildren();
+  try {
+    const response = await fetch("/ask", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({question: document.getElementById("q").value}),
+    });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.detail ? JSON.stringify(data.detail) : response.status);
+    answerEl.textContent = data.answer;
+    for (const source of data.sources) {
+      const li = document.createElement("li");
+      li.value = source.number;
+      li.className = source.cited ? "" : "uncited";
+      const link = document.createElement("a");
+      link.href = source.url;
+      link.target = "_blank";
+      link.textContent = source.title;
+      li.append(link);
+      sourcesEl.append(li);
+    }
+  } catch (error) {
+    answerEl.textContent = "Error: " + error.message;
+  } finally {
+    button.disabled = false;
+  }
+});
+</script>
+</body>
+</html>
