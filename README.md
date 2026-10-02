@@ -103,8 +103,27 @@ retrieval modes. A retrieved chunk counts as a hit when its file matches the gol
 gold heading appears anywhere in the chunk's heading path. Results are written to
 `eval/results/<name>.md`.
 
-**Dev set** (`eval/dev_questions.jsonl`: 30 in-scope and 5 out-of-scope questions that I wrote
-and tuned on; small, so ±1 question moves a metric by about 0.03):
+**Held-out set** (`eval/questions.jsonl`: 44 in-scope + 6 out-of-scope questions written
+independently and never used for tuning; full report in
+[`eval/results/questions.md`](eval/results/questions.md)):
+
+| Mode | hit@1 | hit@5 | MRR@10 |
+|---|---|---|---|
+| vector | 0.61 | **0.89** | 0.73 |
+| bm25 | 0.61 | 0.80 | 0.69 |
+| hybrid (RRF, default) | **0.70** | 0.86 | **0.77** |
+| hybrid + rerank | 0.59 | 0.86 | 0.72 |
+
+Generation (`--answers`, hybrid, `openai/gpt-oss-120b` on Groq): 6/6 out-of-scope questions
+declined; 40/44 in-scope questions answered, all with citations.
+
+Honest reading: hybrid puts the right section first more often (hit@1 0.70 vs 0.61), but vector
+alone finds it in the top 5 slightly more often, and the MRR gain (+0.04 on 44 questions) is
+within noise. Reranking with the default MiniLM cross-encoder hurt on both sets. A full
+`--answers` run takes about 10 minutes because of LLM calls.
+
+**Dev set** (`eval/dev_questions.jsonl`, 30 in-scope + 5 out-of-scope; retrieval was tuned on
+these, so the numbers are optimistic; small, so ±1 question moves a metric by about 0.03):
 
 | Mode | hit@1 | hit@5 | MRR@10 |
 |---|---|---|---|
@@ -119,8 +138,6 @@ The other 4 were declined. In three of them retrieval had missed the right secti
 fourth (scheduling a command daily at 1am) the section was ranked 5th, but the model was too
 cautious to use it.
 
-**Held-out set** (`eval/questions.jsonl`, written by someone else and never used for tuning):
-_to be added._
 
 ## Design decisions and trade-offs
 
@@ -131,7 +148,7 @@ _to be added._
 - **Why is reranking off by default?** A cross-encoder usually helps, and the code supports one
   (`USE_RERANK=true`, or `"mode": "hybrid_rerank"` per request). On the dev set, though,
   `ms-marco-MiniLM-L-6-v2` lowered hit@1. That model was trained on web search queries, not on
-  code-heavy docs. `bge-reranker-base` only roughly matched plain hybrid, cost about 2 s per
+  code-heavy docs. `bge-reranker-base` (tried manually) only roughly matched plain hybrid, cost about 2 s per
   query and would add about 1 GB to the image. So the eval decided the default, and the
   reranker stays available as a switch.
 - **Why Chroma?** It is a real vector database with on-disk persistence, it runs embedded with
